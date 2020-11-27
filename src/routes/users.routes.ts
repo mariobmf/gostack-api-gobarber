@@ -6,10 +6,10 @@ import uploadConfig from '../config/upload';
 import CreateUserService from '../services/CreateUserService';
 import UpdateUserAvatarService from '../services/UpdateUserAvatarService';
 
-const userRouter = Router();
+const usersRouter = Router();
 const upload = multer(uploadConfig);
 
-userRouter.post('/', async (request, response) => {
+usersRouter.post('/', async (request, response) => {
   const { name, email, password } = request.body;
 
   const createUser = new CreateUserService();
@@ -30,7 +30,7 @@ userRouter.post('/', async (request, response) => {
   return response.json(userWithoutPassword);
 });
 
-userRouter.patch(
+usersRouter.patch(
   '/:userId/avatar',
   upload.single('avatar'),
   async (request, response) => {
@@ -53,4 +53,4 @@ userRouter.patch(
   },
 );
 
-export default userRouter;
+export default usersRouter;
